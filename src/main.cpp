@@ -45,6 +45,6 @@ void loop() {
         Serial.println("Status: [No Obstacle]");
     }
 
-    // Polling rate stabilizatioNN
+    // Polling rate stabilizatioN
     delay(300);
 }
