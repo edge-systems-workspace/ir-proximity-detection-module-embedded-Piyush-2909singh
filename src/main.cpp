@@ -1,44 +1,50 @@
 #include <Arduino.h>
+
 /**
  * @file main.cpp
  * @brief Embedded Obstacle Detection System using IR Sensor
- * @author YOUR_NAME
- * @date YYYY-MM-DD
+ * @author Piyush-2909singh
+ * @date 2026-02-21
  *
  * @details
- * Reads digital input from IR sensor
- * and detects obstacle presence.
+ * Reads digital input from an IR sensor module
+ * and displays obstacle presence via Serial Monitor.
  */
 
- // TODO 1:
- // Define IR sensor digital pin (Use pin 2)
+// Hardware Definition
+#define IR_SENSOR_PIN 2
 
- // TODO 2:
- // Create variable to store sensor state
+// State variable
+int sensorState = 0;
 
+/**
+ * @brief System initialization for serial telemetry and GPIO.
+ */
 void setup() {
+    Serial.begin(9600);
 
-    // TODO 3:
-    // Initialize Serial communication (9600 baud rate)
+    // Configure IR sensor pin as input
+    pinMode(IR_SENSOR_PIN, INPUT);
 
-    // TODO 4:
-    // Configure IR pin as INPUT
-
-    // TODO 5:
-    // Print system initialization message
+    Serial.println("System: IR Obstacle Detection Active");
+    Serial.println("------------------------------------");
 }
 
+/**
+ * @brief Main logic loop for real-time obstacle monitoring.
+ */
 void loop() {
+    // Read digital signal from IR sensor
+    sensorState = digitalRead(IR_SENSOR_PIN);
 
-    // TODO 6:
-    // Read digital value from IR sensor
+    // Evaluate signal: Typically LOW (0) means obstacle detected
+    // depending on the specific IR module calibration.
+    if (sensorState == LOW) {
+        Serial.println("Status: [Obstacle Detected]");
+    } else {
+        Serial.println("Status: [No Obstacle]");
+    }
 
-    // TODO 7:
-    // If obstacle detected
-    //     Print "Obstacle Detected"
-    // Else
-    //     Print "No Obstacle"
-
-    // TODO 8:
-    // Add small delay (200–500ms)
+    // Polling rate stabilization
+    delay(300);
 }
